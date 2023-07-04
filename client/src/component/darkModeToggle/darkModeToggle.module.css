@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.dark_mode_input {
+  display: none;
+}
+
 .icon {
   font-size: 12px;
 }

@@ -1,6 +1,6 @@
-/* :root {
+:root {
   --body_background: white;
-  --body_color: #bbb;
+  --body_color: black;
   --link_color: navy;
 }
 
@@ -8,20 +8,21 @@
   --body_background: #282c34;
   --body_color: #bbb;
   --link_color: navy;
-} */
+}
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: 1s all ease;
 }
 
 html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  background-color: rgb(25, 25, 62);
-  color: #bbb;
+  /* background-color: rgb(25, 25, 62);
+  color: #bbb; */
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
