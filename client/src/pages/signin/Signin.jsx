@@ -1,10 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./signin.module.css";
 
 const Signin = () => {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [validationErr, setValidationErr] = useState({
+    emailErr: "",
+    passwordErr: "",
+  });
+
+  const border_outline =
+    validationErr.passwordErr !== "" ? styles.err_outline : null;
+
+  useEffect(() => {
+    if ((credentials.password !== "") & (credentials.password.length <= 3)) {
+      setValidationErr({ ...validationErr, passwordErr: "Weak password!" });
+    } else {
+      setValidationErr({ ...validationErr, passwordErr: "" });
+    }
+  }, [credentials]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("user input: ", credentials);
+  };
   return (
-    <div>
-      <h1>This is Signin page.</h1>
+    <div className={styles.container}>
+      <div className={styles.box}>
+        <h1 style={{ textAlign: "center" }}>Signin</h1>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div className={styles.field}>
+            <label className={styles.label}>Email</label>
+            <input
+              className={styles.input_field}
+              placeholder="example@example.com"
+              type="text"
+              // value={credentials.email}
+            />
+          </div>
+
+          <div className={styles.field}>
+            <label className={styles.label}>Password</label>
+            <input
+              className={styles.input_field + " " + border_outline}
+              placeholder="password"
+              type="text"
+              value={credentials.password}
+              onChange={(e) =>
+                setCredentials({ ...credentials, password: e.target.value })
+              }
+            />
+
+            <span className={styles.err}>
+              {validationErr.passwordErr !== ""
+                ? validationErr.passwordErr
+                : null}
+            </span>
+          </div>
+          <div className={styles.btns}>
+            <button className={styles.btn}>Signin</button>
+            <span className={styles.or}>- OR -</span>
+            <button className={styles.btn + " " + styles.google}>google</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

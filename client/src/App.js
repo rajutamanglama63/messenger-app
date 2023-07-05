@@ -5,7 +5,9 @@ import DarkModeToggle from "./component/darkModeToggle/DarkModeToggle";
 function App() {
   return (
     <div className="App">
-      <DarkModeToggle />
+      <div className="toggle-tab">
+        <DarkModeToggle />
+      </div>
       <Router />
     </div>
   );
