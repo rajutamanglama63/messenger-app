@@ -89,3 +89,14 @@
 .google {
   background-color: rgba(228, 97, 50, 0.72);
 }
+
+.linker {
+  font-size: 1rem;
+  color: #53c28b;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.linker:hover {
+  text-decoration: underline;
+}

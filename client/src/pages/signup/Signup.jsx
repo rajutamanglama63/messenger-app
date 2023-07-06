@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./signup.module.css";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -18,19 +20,6 @@ const Signup = () => {
 
   const username_err_outline =
     validationErr.usernameErr !== "" ? styles.err_outline : null;
-
-  // useEffect(() => {
-  //   if ((credentials.password !== "") & (credentials.password.length <= 3)) {
-  //     setValidationErr({ ...validationErr, passwordErr: "Weak password!" });
-  //   } else if (
-  //     (credentials.username !== "") &
-  //     (credentials.username.length > 8)
-  //   ) {
-  //     setValidationErr({ ...validationErr, usernameErr: "Invalid username!" });
-  //   } else {
-  //     setValidationErr({ ...validationErr, passwordErr: "" });
-  //   }
-  // }, [credentials]);
 
   useEffect(() => {
     if (credentials.password !== "" && credentials.password.length <= 3) {
@@ -112,6 +101,10 @@ const Signup = () => {
             <span className={styles.or}>- OR -</span>
             <button className={styles.btn + " " + styles.google}>google</button>
           </div>
+
+          <span onClick={() => navigate("/signin")} className={styles.linker}>
+            Already registered! Signin.
+          </span>
         </form>
       </div>
     </div>

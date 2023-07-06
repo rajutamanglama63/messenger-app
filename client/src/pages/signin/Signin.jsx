@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styles from "./signin.module.css";
 
 const Signin = () => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -63,8 +65,11 @@ const Signin = () => {
           <div className={styles.btns}>
             <button className={styles.btn}>Signin</button>
             <span className={styles.or}>- OR -</span>
-            <button className={styles.btn + " " + styles.google}>google</button>
+            <button className={styles.btn + " " + styles.google}>Google</button>
           </div>
+          <span onClick={() => navigate("/signup")} className={styles.linker}>
+            Not registered yet! Signup.
+          </span>
         </form>
       </div>
     </div>
