@@ -12,6 +12,7 @@ const Signup = () => {
 
   const [validationErr, setValidationErr] = useState({
     usernameErr: "",
+    emailErr: "",
     passwordErr: "",
   });
 
@@ -20,6 +21,9 @@ const Signup = () => {
 
   const username_err_outline =
     validationErr.usernameErr !== "" ? styles.err_outline : null;
+
+  const email_err_outline =
+    validationErr.emailErr !== "" ? styles.err_outline : null;
 
   useEffect(() => {
     if (credentials.password !== "" && credentials.password.length <= 3) {
@@ -36,6 +40,7 @@ const Signup = () => {
       setValidationErr((prevValidationErr) => ({
         ...prevValidationErr,
         passwordErr: "",
+        emailErr: "",
         usernameErr: "",
       }));
     }
@@ -44,6 +49,18 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("user input: ", credentials);
+    if (
+      credentials.email === "" &&
+      credentials.username === "" &&
+      credentials.password === ""
+    ) {
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        usernameErr: "Username required!",
+        emailErr: "Email required!",
+        passwordErr: "Password required!",
+      }));
+    }
   };
   return (
     <div className={styles.container}>
@@ -71,11 +88,17 @@ const Signup = () => {
           <div className={styles.field}>
             <label className={styles.label}>Email</label>
             <input
-              className={styles.input_field}
+              className={styles.input_field + " " + email_err_outline}
               placeholder="example@example.com"
               type="email"
-              // value={credentials.email}
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
             />
+            <span className={styles.err}>
+              {validationErr.emailErr !== "" ? validationErr.emailErr : null}
+            </span>
           </div>
 
           <div className={styles.field}>

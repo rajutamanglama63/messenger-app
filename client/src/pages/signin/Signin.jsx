@@ -14,20 +14,30 @@ const Signin = () => {
     passwordErr: "",
   });
 
-  const border_outline =
+  const pswd_err_outline =
     validationErr.passwordErr !== "" ? styles.err_outline : null;
+
+  const email_err_outline =
+    validationErr.emailErr !== "" ? styles.err_outline : null;
 
   useEffect(() => {
     if ((credentials.password !== "") & (credentials.password.length <= 3)) {
       setValidationErr({ ...validationErr, passwordErr: "Weak password!" });
     } else {
-      setValidationErr({ ...validationErr, passwordErr: "" });
+      setValidationErr({ ...validationErr, passwordErr: "", emailErr: "" });
     }
   }, [credentials]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("user input: ", credentials);
+    if (credentials.email === "" && credentials.password === "") {
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        emailErr: "Email required!",
+        passwordErr: "Password required!",
+      }));
+    }
   };
   return (
     <div className={styles.container}>
@@ -37,17 +47,23 @@ const Signin = () => {
           <div className={styles.field}>
             <label className={styles.label}>Email</label>
             <input
-              className={styles.input_field}
+              className={styles.input_field + " " + email_err_outline}
               placeholder="example@example.com"
               type="text"
-              // value={credentials.email}
+              value={credentials.email}
+              onChange={(e) =>
+                setCredentials({ ...credentials, email: e.target.value })
+              }
             />
+            <span className={styles.err}>
+              {validationErr.emailErr !== "" ? validationErr.emailErr : null}
+            </span>
           </div>
 
           <div className={styles.field}>
             <label className={styles.label}>Password</label>
             <input
-              className={styles.input_field + " " + border_outline}
+              className={styles.input_field + " " + pswd_err_outline}
               placeholder="password"
               type="text"
               value={credentials.password}
