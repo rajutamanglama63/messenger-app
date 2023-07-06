@@ -22,9 +22,16 @@ const Signin = () => {
 
   useEffect(() => {
     if ((credentials.password !== "") & (credentials.password.length <= 3)) {
-      setValidationErr({ ...validationErr, passwordErr: "Weak password!" });
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        passwordErr: "Weak password!",
+      }));
     } else {
-      setValidationErr({ ...validationErr, passwordErr: "", emailErr: "" });
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        passwordErr: "",
+        emailErr: "",
+      }));
     }
   }, [credentials]);
 

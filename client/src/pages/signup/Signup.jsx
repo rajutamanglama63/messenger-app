@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./signup.module.css";
+import { signupService } from "../../services/authService";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -46,9 +47,17 @@ const Signup = () => {
     }
   }, [credentials, setValidationErr]);
 
+  const clearField = () => {
+    setCredentials({
+      username: "",
+      email: "",
+      password: "",
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("user input: ", credentials);
+    signupService(credentials);
     if (
       credentials.email === "" &&
       credentials.username === "" &&
@@ -61,6 +70,8 @@ const Signup = () => {
         passwordErr: "Password required!",
       }));
     }
+
+    clearField();
   };
   return (
     <div className={styles.container}>
