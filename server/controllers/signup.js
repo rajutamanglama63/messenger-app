@@ -1,17 +1,48 @@
-const signup = (req, res) => {
+const { PrismaClient } = require("@prisma/client");
+
+const prisma = new PrismaClient();
+
+const bcrypt = require("bcrypt");
+
+const signup = async (req, res) => {
   try {
     const { username, email, password } = req.body;
 
     if (username === "") {
       return res.status(400).json({ msg: "Username must not be empty!" });
-    } else if (email === "") {
-      return res.status(400).json({ msg: "Email must not be empty!" });
-    } else if (password === "") {
-      return res.status(400).json({ msg: "Password must not be empty!" });
-    } else {
-      console.log({ username, email, password });
-      return res.status(200).json({ msg: "Registered successfully!" });
     }
+    if (email === "") {
+      return res.status(400).json({ msg: "Email must not be empty!" });
+    }
+    if (password === "") {
+      return res.status(400).json({ msg: "Password must not be empty!" });
+    }
+
+    const existingUser = await prisma.user.findUnique({
+      where: {
+        username,
+      },
+    });
+
+    if (existingUser) {
+      console.log(existingUser);
+      return res
+        .status(400)
+        .json({ msg: "User with this email already exist!" });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    const hassedPswd = await bcrypt.hash(password, salt);
+
+    const newUser = await prisma.user.create({
+      data: {
+        username,
+        email,
+        password: hassedPswd,
+      },
+    });
+
+    return res.status(201).json({ msg: "Registered successfully!", newUser });
   } catch (error) {
     console.log("signup: ", error);
   }
