@@ -1,15 +1,25 @@
 const express = require("express");
 const helmet = require("helmet");
 const session = require("express-session");
-const PgSession = require("connect-pg-simple")(session);
+const Redis = require("ioredis");
+const RedisStore = require("connect-redis")(session);
+// const PgSession = require("connect-pg-simple")(session);
 
 const authRouter = require("./routes/authRoute");
 const config = require("./utils/config");
 
 const app = express();
 
-const sessionStore = new PgSession({
-  conString: config.DATABASE_URL,
+const redisClient = new Redis();
+
+// we are not using connect-pg-simple but instead we are using connect-redis
+
+// const sessionStore = new PgSession({
+//   conString: config.DATABASE_URL,
+// });
+
+const sessionStore = new RedisStore({
+  client: redisClient,
 });
 
 app.use(helmet());
