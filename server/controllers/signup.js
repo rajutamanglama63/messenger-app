@@ -9,13 +9,17 @@ const signup = async (req, res) => {
     const { username, email, password } = req.body;
 
     if (username === "") {
-      return res.status(400).json({ msg: "Username must not be empty!" });
+      return res
+        .status(400)
+        .json({ usernameErrMsg: "Username must not be empty!" });
     }
     if (email === "") {
-      return res.status(400).json({ msg: "Email must not be empty!" });
+      return res.status(400).json({ emailErrMsg: "Email must not be empty!" });
     }
     if (password === "") {
-      return res.status(400).json({ msg: "Password must not be empty!" });
+      return res
+        .status(400)
+        .json({ pswdErrMsg: "Password must not be empty!" });
     }
 
     const existingUser = await prisma.user.findUnique({
@@ -28,7 +32,7 @@ const signup = async (req, res) => {
       console.log(existingUser);
       return res
         .status(400)
-        .json({ msg: "User with this email already exist!" });
+        .json({ errMsg: "User with this email already exist!" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -42,7 +46,9 @@ const signup = async (req, res) => {
       },
     });
 
-    return res.status(201).json({ msg: "Registered successfully!", newUser });
+    return res
+      .status(201)
+      .json({ successMsg: "Registered successfully!", newUser });
   } catch (error) {
     console.log("signup: ", error);
   }

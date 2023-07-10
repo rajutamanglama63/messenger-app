@@ -2,7 +2,7 @@ const express = require("express");
 const helmet = require("helmet");
 const session = require("express-session");
 const Redis = require("ioredis");
-const RedisStore = require("connect-redis")(session);
+const RedisStore = require("connect-redis").default;
 // const PgSession = require("connect-pg-simple")(session);
 
 const authRouter = require("./routes/authRoute");

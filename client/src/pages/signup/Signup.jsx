@@ -5,6 +5,7 @@ import { signupService } from "../../services/authService";
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [serverResponse, setServerResponse] = useState({});
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -16,6 +17,8 @@ const Signup = () => {
     emailErr: "",
     passwordErr: "",
   });
+
+  // console.log(validationErr.passwordErr);
 
   const pswd_err_outline =
     validationErr.passwordErr !== "" ? styles.err_outline : null;
@@ -47,6 +50,36 @@ const Signup = () => {
     }
   }, [credentials, setValidationErr]);
 
+  useEffect(() => {
+    if (serverResponse.usernameErrMsg) {
+      console.log("true");
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        usernameErr: serverResponse.usernameErrMsg,
+      }));
+    } else if (serverResponse.emailErrMsg) {
+      console.log("true");
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        emailErr: serverResponse.emailErrMsg,
+      }));
+    } else if (serverResponse.pswdErrMsg) {
+      console.log("true");
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        passwordErr: serverResponse.pswdErrMsg,
+      }));
+    } else {
+      console.log("false");
+      setValidationErr((prevValidationErr) => ({
+        ...prevValidationErr,
+        passwordErr: "",
+        emailErr: "",
+        usernameErr: "",
+      }));
+    }
+  }, [serverResponse]);
+
   const clearField = () => {
     setCredentials({
       username: "",
@@ -55,9 +88,66 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    signupService(credentials);
+    const resData = await signupService(credentials);
+
+    setServerResponse(resData);
+
+    // if (resData.usernameErrMsg ) {
+    //   console.log("I am here darling");
+    //   setValidationErr((prevValidationErr) => ({
+    //     ...prevValidationErr,
+    //     usernameErr: resData.usernameErrMsg,
+    //   }));
+    // }
+
+    // if (resData.emailErrMsg ) {
+    //   setValidationErr((prevValidationErr) => ({
+    //     ...prevValidationErr,
+    //     emailErr: resData.emailErrMsg,
+    //   }));
+    // }
+
+    // if (resData.pswdErrMsg ) {
+    //   console.log("here i am");
+    //   setValidationErr((prevValidationErr) => ({
+    //     ...prevValidationErr,
+    //     passwordErr: resData.pswdErrMsg,
+    //   }));
+    // }
+
+    // switch (true) {
+    //   case resData.usernameErrMsg:
+    //     console.log("I am here darling");
+    //     setValidationErr((prevValidationErr) => ({
+    //       ...prevValidationErr,
+    //       usernameErr: resData.usernameErrMsg,
+    //     }));
+    //     break;
+    //   case resData.emailErrMsg:
+    //     setValidationErr((prevValidationErr) => ({
+    //       ...prevValidationErr,
+    //       emailErr: resData.emailErrMsg,
+    //     }));
+    //     break;
+    //   case resData.pswdErrMsg:
+    //     console.log("here i am");
+    //     setValidationErr((prevValidationErr) => ({
+    //       ...prevValidationErr,
+    //       passwordErr: resData.pswdErrMsg,
+    //     }));
+    //     break;
+    //   default:
+    //     setValidationErr((prevValidationErr) => ({
+    //       ...prevValidationErr,
+    //       passwordErr: "",
+    //       emailErr: "",
+    //       usernameErr: "",
+    //     }));
+    //     break;
+    // }
+
     if (
       credentials.email === "" &&
       credentials.username === "" &&
