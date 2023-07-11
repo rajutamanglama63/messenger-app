@@ -94,60 +94,6 @@ const Signup = () => {
 
     setServerResponse(resData);
 
-    // if (resData.usernameErrMsg ) {
-    //   console.log("I am here darling");
-    //   setValidationErr((prevValidationErr) => ({
-    //     ...prevValidationErr,
-    //     usernameErr: resData.usernameErrMsg,
-    //   }));
-    // }
-
-    // if (resData.emailErrMsg ) {
-    //   setValidationErr((prevValidationErr) => ({
-    //     ...prevValidationErr,
-    //     emailErr: resData.emailErrMsg,
-    //   }));
-    // }
-
-    // if (resData.pswdErrMsg ) {
-    //   console.log("here i am");
-    //   setValidationErr((prevValidationErr) => ({
-    //     ...prevValidationErr,
-    //     passwordErr: resData.pswdErrMsg,
-    //   }));
-    // }
-
-    // switch (true) {
-    //   case resData.usernameErrMsg:
-    //     console.log("I am here darling");
-    //     setValidationErr((prevValidationErr) => ({
-    //       ...prevValidationErr,
-    //       usernameErr: resData.usernameErrMsg,
-    //     }));
-    //     break;
-    //   case resData.emailErrMsg:
-    //     setValidationErr((prevValidationErr) => ({
-    //       ...prevValidationErr,
-    //       emailErr: resData.emailErrMsg,
-    //     }));
-    //     break;
-    //   case resData.pswdErrMsg:
-    //     console.log("here i am");
-    //     setValidationErr((prevValidationErr) => ({
-    //       ...prevValidationErr,
-    //       passwordErr: resData.pswdErrMsg,
-    //     }));
-    //     break;
-    //   default:
-    //     setValidationErr((prevValidationErr) => ({
-    //       ...prevValidationErr,
-    //       passwordErr: "",
-    //       emailErr: "",
-    //       usernameErr: "",
-    //     }));
-    //     break;
-    // }
-
     if (
       credentials.email === "" &&
       credentials.username === "" &&
