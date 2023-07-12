@@ -4,9 +4,9 @@ import styles from "./signup.module.css";
 import { signupService } from "../../services/authService";
 import Notification from "../../component/notification/Notification";
 
-const Signup = () => {
+const Signup = ({ serverResponse, setServerResponse }) => {
   const navigate = useNavigate();
-  const [serverResponse, setServerResponse] = useState({});
+
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
@@ -88,7 +88,6 @@ const Signup = () => {
     const resData = await signupService(credentials);
 
     setServerResponse(resData);
-
     if (
       credentials.email === "" &&
       credentials.username === "" &&
@@ -167,7 +166,9 @@ const Signup = () => {
               </span>
             </div>
             <div className={styles.btns}>
-              <button className={styles.btn}>Signup</button>
+              <button type="submit" className={styles.btn}>
+                Signup
+              </button>
               <span className={styles.or}>- OR -</span>
               <button className={styles.btn + " " + styles.google}>
                 google

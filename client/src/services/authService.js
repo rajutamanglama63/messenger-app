@@ -12,3 +12,13 @@ export const signupService = async (userData) => {
     return error.response.data;
   }
 };
+
+export const signinService = async (credentials) => {
+  try {
+    const response = await axios.post(`${baseUrl}/signin`, credentials);
+    console.log("signin res from server: ", response);
+  } catch (error) {
+    console.log("signin err: ", error.response.data);
+    return error.response.data;
+  }
+};
