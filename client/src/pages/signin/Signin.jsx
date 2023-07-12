@@ -5,6 +5,8 @@ import Notification from "../../component/notification/Notification";
 import { signinService } from "../../services/authService";
 
 const Signin = ({ serverResponse, setServerResponse }) => {
+  // const [serverResponse, setServerResponse] = useState({});
+  console.log("server res: ", serverResponse);
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     email: "",
@@ -69,6 +71,7 @@ const Signin = ({ serverResponse, setServerResponse }) => {
     console.log("user input: ", credentials);
 
     const resData = await signinService(credentials);
+    console.log("data res from server: ", resData);
 
     setServerResponse(resData);
 

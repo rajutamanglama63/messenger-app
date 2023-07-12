@@ -5,6 +5,8 @@ import { signupService } from "../../services/authService";
 import Notification from "../../component/notification/Notification";
 
 const Signup = ({ serverResponse, setServerResponse }) => {
+  // const [serverResponse, setServerResponse] = useState({});
+  console.log("res from server: ", serverResponse);
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
