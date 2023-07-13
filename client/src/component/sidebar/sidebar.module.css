@@ -1,0 +1,52 @@
+.container {
+  flex: 2;
+  border-right: 2px solid #bbb;
+  height: 100vh;
+}
+
+.content {
+  padding: 15px;
+}
+
+.add_friend {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--body_background);
+  /* margin: 1rem 0; */
+  border: 1px solid #bbb;
+  border-radius: 5px;
+}
+
+.friend {
+  margin-top: 1rem;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--body_background);
+  border-bottom: 1px solid #bbb;
+  cursor: pointer;
+}
+
+.name {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.status {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+
+.online {
+  background-color: rgb(61, 244, 61);
+}
+
+.offline {
+  background-color: #bbb;
+}
