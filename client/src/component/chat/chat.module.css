@@ -1,4 +1,13 @@
 .container {
   flex: 10;
-  border: 1px solid navy;
+}
+
+.content {
+  margin-top: 3rem;
+  height: 100vh;
+}
+
+.chat_room_status {
+  text-align: center;
+  font-size: 22px;
 }

@@ -3,9 +3,11 @@ import { Icon } from "@iconify/react";
 import styles from "./sidebar.module.css";
 import { UserContext } from "../../context/UserContext";
 
-const Sidebar = () => {
+const Sidebar = ({ setUserId }) => {
   const users = useContext(UserContext);
-  console.log("users: ", users);
+  const tabHandler = (id) => {
+    setUserId(id);
+  };
   return (
     <div className={styles.container}>
       <div className={styles.content}>
@@ -16,7 +18,11 @@ const Sidebar = () => {
         {users.length > 0
           ? users.map((user) => (
               <React.Fragment key={user.id}>
-                <div className={styles.friend} key={user.id}>
+                <div
+                  className={styles.friend}
+                  key={user.id}
+                  onClick={() => tabHandler(user.id)}
+                >
                   <span className={styles.name}>{user.username}</span>
                   <span className={styles.status + " " + styles.online}></span>
                 </div>
