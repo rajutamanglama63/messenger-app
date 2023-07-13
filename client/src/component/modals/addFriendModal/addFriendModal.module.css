@@ -1,0 +1,26 @@
+.modal {
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  position: absolute;
+  width: 30%;
+  /* top: 20rem;
+  left: 50rem; */
+  /* right: 30rem;
+  bottom: 20rem;  */
+  z-index: 300;
+}
+
+.openModal {
+  display: flex;
+}
+
+.close_modal {
+  display: none;
+}
+
+.content {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
