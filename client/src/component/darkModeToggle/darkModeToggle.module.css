@@ -9,6 +9,7 @@
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
+  z-index: 500;
 }
 
 .dark_mode_input {
