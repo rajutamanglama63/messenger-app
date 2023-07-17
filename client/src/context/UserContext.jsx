@@ -1,76 +1,23 @@
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
+import { getUsersService } from "../services/userService";
 
 export const UserContext = createContext([]);
 
 export const UserContextProvider = ({ children }) => {
-  const users = [
-    {
-      id: 1,
-      username: "Padmini",
-    },
-    {
-      id: 2,
-      username: "Daamenee",
-    },
-    {
-      id: 3,
-      username: "Padmawoti",
-    },
-    {
-      id: 3012102,
-      username: "Padmawoti",
-    },
-    {
-      id: 4,
-      username: "Padmawoti",
-    },
-    {
-      id: 5,
-      username: "Padmawoti",
-    },
-    {
-      id: 6,
-      username: "Padmawoti",
-    },
-    {
-      id: 7,
-      username: "Padmawoti",
-    },
-    {
-      id: 8,
-      username: "Padmawoti",
-    },
-    {
-      id: 9,
-      username: "Padmawoti",
-    },
-    {
-      id: 10,
-      username: "Padmawoti",
-    },
-    {
-      id: 11,
-      username: "Padmawoti",
-    },
-    {
-      id: 12,
-      username: "Padmawoti",
-    },
-    {
-      id: 13,
-      username: "Padmawoti",
-    },
-    {
-      id: 14,
-      username: "Padmawoti",
-    },
-    {
-      id: 15,
-      username: "Padmawoti",
-    },
-  ];
+  const [users, setUsers] = useState([]);
 
-  // const [user, setUser] =
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const allUsers = await getUsersService();
+        setUsers(allUsers);
+      } catch (error) {
+        console.log("err from user context: ", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return <UserContext.Provider value={users}>{children}</UserContext.Provider>;
 };

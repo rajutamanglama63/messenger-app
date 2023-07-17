@@ -7,7 +7,7 @@ export const getUsersService = async () => {
     const response = await axios.get(baseUrl);
 
     console.log("getUsers from server: ", response);
-    return response.data;
+    return response.data.users;
   } catch (error) {
     console.log("getUsersService err: ", error.response.data);
     return error.response.data;
